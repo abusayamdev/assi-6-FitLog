@@ -18,9 +18,9 @@ export default function Hero() {
 
                         {/* Heading */}
                         <h1 className="fitlog-heading mt-5">
-                            TRAIN WITH INTENT.
+                            TRAIN WITH INTENT.LOG
                             <br />
-                            LOG EVERY SET.
+                             EVERY SET.
                         </h1>
 
                         {/* Description */}

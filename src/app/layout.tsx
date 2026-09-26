@@ -4,6 +4,7 @@ import Navbar from "@/components/NavBar";
 import { FitLogProvider } from "@/context/FitLogContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "FitLog",
@@ -22,6 +23,9 @@ export default function RootLayout({
           <Navbar />
 
           {children}
+
+          <Footer></Footer>
+
 
           <ToastContainer
             position="bottom-right"
