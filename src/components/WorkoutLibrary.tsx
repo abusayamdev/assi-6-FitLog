@@ -1,6 +1,29 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
+import { getWorkouts } from "@/lib/api";
+import WorkoutCard from "./WorkoutCard";
+import { Workout } from "@/types/workout";
 
 export default function WorkoutLibrary() {
+    const [workouts, setWorkouts] = useState<Workout[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadWorkouts() {
+            try {
+                const data = await getWorkouts();
+                setWorkouts(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadWorkouts();
+    }, []);
+
     return (
         <section
             id="library"
@@ -8,36 +31,30 @@ export default function WorkoutLibrary() {
         >
             <div className="fitlog-container">
 
-                {/* Section Header */}
-                <div className="mb-10 flex items-end justify-between gap-6">
+                <div className="mb-10">
+                    <p className="fitlog-eyebrow">
+                        THE LIBRARY
+                    </p>
 
-                    <div>
-                        <p className="fitlog-eyebrow">
-                            THE LIBRARY
-                        </p>
+                    <p className="mt-3 text-sm text-[var(--fitlog-muted)] md:text-base">
+                        Twelve lifts covering every major muscle group.
+                    </p>
+                </div>
 
-                        <h2 className="mt-3 text-3xl font-black uppercase tracking-tight text-white md:text-4xl">
-                            Twelve lifts.
-                        </h2>
-
-                        <p className="mt-3 text-sm text-[var(--fitlog-muted)] md:text-base">
-                            Twelve lifts covering every major muscle group.
-                        </p>
+                {loading ? (
+                    <div className="py-20 text-center text-sm text-white/50">
+                        Loading workouts...
                     </div>
-
-                    <Link
-                        href="#library"
-                        className="hidden text-xs font-bold uppercase tracking-wide text-[#ccff00] md:block"
-                    >
-                        View all
-                    </Link>
-
-                </div>
-
-                {/* Workout Grid */}
-                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                    {/* Cards will come here */}
-                </div>
+                ) : (
+                    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                        {workouts.map((workout) => (
+                            <WorkoutCard
+                                key={workout.id}
+                                workout={workout}
+                            />
+                        ))}
+                    </div>
+                )}
 
             </div>
         </section>
