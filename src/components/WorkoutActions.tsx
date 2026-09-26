@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { useFitLog } from "@/context/FitLogContext";
 
 type WorkoutActionsProps = {
@@ -23,23 +24,33 @@ export default function WorkoutActions({
     const planIsFull = planCount >= maxPlanItems;
 
     function handleAddToPlan() {
+        // Don't add the same workout twice
+        if (alreadyInPlan) {
+            toast.info("Workout is already in your plan.");
+            return;
+        }
 
-        // Don't add the workout if it is already in today's plan
-        if (alreadyInPlan || planIsFull) {
+        // Keep today's plan limited to five workouts
+        if (planIsFull) {
+            toast.warning("Your plan is full.");
             return;
         }
 
         addToPlan(workoutId);
 
+        toast.success("Workout added to your plan.");
     }
 
     function handleSaveForLater() {
         // Don't save the same workout twice
         if (alreadySaved) {
+            toast.info("Workout is already saved.");
             return;
         }
 
         saveForLater(workoutId);
+
+        toast.success("Workout saved for later.");
     }
 
     return (
@@ -65,19 +76,14 @@ export default function WorkoutActions({
                 type="button"
                 onClick={handleSaveForLater}
                 disabled={alreadySaved}
-                className={`rounded-md border px-5 py-3 text-xs font-black uppercase tracking-wide 
-                    
-                    transition ${alreadySaved
+                className={`rounded-md border px-5 py-3 text-xs font-black uppercase tracking-wide transition ${alreadySaved
                         ? "cursor-not-allowed border-[#ccff00]/40 text-[#ccff00]/50"
                         : "border-white/15 text-white hover:border-[#ccff00] hover:text-[#ccff00]"
-
                     }`}
             >
-                {
-                alreadySaved
+                {alreadySaved
                     ? "SAVED"
-                    : "SAVE FOR LATER"
-                }
+                    : "SAVE FOR LATER"}
             </button>
 
         </div>
