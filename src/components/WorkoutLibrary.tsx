@@ -9,6 +9,7 @@ import SortDropdown from "./SortDropdown";
 type SortOption = "duration" | "calories" | "rating";
 
 export default function WorkoutLibrary() {
+    
     const [workouts, setWorkouts] = useState<Workout[]>([]);
     const [sortBy, setSortBy] =
         useState<SortOption>("duration");
