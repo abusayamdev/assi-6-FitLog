@@ -3,15 +3,9 @@
 
 :root {
   --fitlog-bg: #0a0a0a;
-  --fitlog-surface: #15161a;
-  --fitlog-border: #292929;
-  --fitlog-text: #ffffff;
-  --fitlog-muted: #85878c;
+  --fitlog-card: #15161b;
   --fitlog-accent: #ccff00;
-}
-
-* {
-  box-sizing: border-box;
+  --fitlog-muted: #8b8d91;
 }
 
 html {
@@ -21,65 +15,63 @@ html {
 body {
   margin: 0;
   background: var(--fitlog-bg);
-  color: var(--fitlog-text);
-  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
-a {
-  text-decoration: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-::selection {
-  background: var(--fitlog-accent);
-  color: #000;
-}
-
-/* Main content container */
+/* Main container */
 .fitlog-container {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 24px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .fitlog-container {
-    padding-inline: 1.5rem;
+    padding-inline: 32px;
   }
 }
 
-@media (min-width: 1024px) {
-  .fitlog-container {
-    padding-inline: 2rem;
-  }
+/* Small section label */
+.fitlog-eyebrow {
+  color: var(--fitlog-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-/* Main lime button */
+/* Main Hero heading */
+.fitlog-heading {
+  max-width: 720px;
+  color: white;
+  font-size: clamp(42px, 6vw, 82px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+/* CTA */
 .fitlog-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  border: 0;
-  border-radius: 9999px;
+  gap: 10px;
 
   background: var(--fitlog-accent);
   color: #000;
 
-  padding: 0.8rem 1.25rem;
+  padding: 14px 20px;
+  border-radius: 6px;
 
-  font-size: 0.8rem;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 900;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 
   transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fitlog-btn:hover {
@@ -87,22 +79,17 @@ button {
   transform: translateY(-1px);
 }
 
-/* Small green section label */
-.fitlog-eyebrow {
-  color: var(--fitlog-accent);
-
-  font-size: 0.75rem;
-  font-weight: 800;
-
-  letter-spacing: 0.2em;
+.fitlog-btn:active {
+  transform: translateY(0);
 }
 
-/* Large FitLog headings */
-.fitlog-heading {
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
+/* Mobile */
+@media (max-width: 767px) {
+  .fitlog-container {
+    padding-inline: 20px;
+  }
 
-  font-weight: 900;
-  line-height: 0.95;
-
-  letter-spacing: -0.04em;
+  .fitlog-heading {
+    font-size: clamp(40px, 12vw, 60px);
+  }
 }

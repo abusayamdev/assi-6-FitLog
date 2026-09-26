@@ -1,24 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/NavBar";
+import Hero from "@/components/Hero";
 
-
-export const metadata: Metadata = {
-  title: "FitLog",
-  description: "Workout Library",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Home() {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-      </body>
-    </html>
+    <main>
+      <Hero />
+    </main>
   );
 }
