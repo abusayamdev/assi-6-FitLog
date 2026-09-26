@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
+import { FitLogProvider } from "@/context/FitLogContext";
 
 export const metadata: Metadata = {
   title: "FitLog",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
+        <FitLogProvider>
+          <Navbar />
+          {children}
+        </FitLogProvider>
       </body>
     </html>
   );

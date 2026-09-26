@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getWorkoutById } from "@/lib/api";
+import WorkoutActions from "@/components/WorkoutActions";
 
 type WorkoutDetailsPageProps = {
     params: Promise<{
@@ -25,7 +26,7 @@ export default async function WorkoutDetailsPage({
 
                 <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
 
-                    {/* Image */}
+                    {/* Workout image */}
                     <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#15161b]">
                         <div className="relative aspect-square">
                             <Image
@@ -38,10 +39,10 @@ export default async function WorkoutDetailsPage({
                         </div>
                     </div>
 
-                    {/* Content */}
+                    {/* Workout information */}
                     <div className="flex flex-col justify-center">
 
-                        {/* Tags */}
+                        {/* Muscle group tags */}
                         <div className="mb-5 flex flex-wrap gap-2">
                             {workout.muscleGroups.map((muscle) => (
                                 <span
@@ -53,7 +54,7 @@ export default async function WorkoutDetailsPage({
                             ))}
                         </div>
 
-                        {/* Title */}
+                        {/* Workout name */}
                         <h1 className="text-4xl font-black uppercase leading-none tracking-tight text-white md:text-5xl">
                             {workout.name}
                         </h1>
@@ -63,7 +64,7 @@ export default async function WorkoutDetailsPage({
                             {workout.description}
                         </p>
 
-                        {/* Key Specs */}
+                        {/* Key specs */}
                         <div className="mt-8">
                             <p className="fitlog-eyebrow">
                                 KEY SPECS
@@ -109,24 +110,8 @@ export default async function WorkoutDetailsPage({
                             </div>
                         </div>
 
-                        {/* Actions */}
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-
-                            <button
-                                type="button"
-                                className="fitlog-btn justify-center"
-                            >
-                                ADD TO TODAY&apos;S PLAN
-                            </button>
-
-                            <button
-                                type="button"
-                                className="rounded-md border border-white/15 px-5 py-3 text-xs font-black uppercase tracking-wide text-white transition hover:border-[#ccff00] hover:text-[#ccff00]"
-                            >
-                                SAVE FOR LATER
-                            </button>
-
-                        </div>
+                        {/* Add and save buttons */}
+                        <WorkoutActions workoutId={workout.id} />
 
                     </div>
                 </div>
@@ -139,20 +124,22 @@ export default async function WorkoutDetailsPage({
                     </p>
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
-                        {workout.instructions.map((instruction, index) => (
-                            <div
-                                key={instruction}
-                                className="rounded-lg border border-white/10 bg-[#15161b] p-5"
-                            >
-                                <span className="text-sm font-black text-[#ccff00]">
-                                    0{index + 1}
-                                </span>
+                        {workout.instructions.map(
+                            (instruction, index) => (
+                                <div
+                                    key={instruction}
+                                    className="rounded-lg border border-white/10 bg-[#15161b] p-5"
+                                >
+                                    <span className="text-sm font-black text-[#ccff00]">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
 
-                                <p className="mt-3 text-sm leading-6 text-white/60">
-                                    {instruction}
-                                </p>
-                            </div>
-                        ))}
+                                    <p className="mt-3 text-sm leading-6 text-white/60">
+                                        {instruction}
+                                    </p>
+                                </div>
+                            )
+                        )}
                     </div>
 
                 </div>
