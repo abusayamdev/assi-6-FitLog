@@ -1,6 +1,7 @@
+import { Workout } from "@/types/workout";
 import Image from "next/image";
 import Link from "next/link";
-import type { Workout } from "@/types/workout";
+
 
 type WorkoutCardProps = {
     workout: Workout;
@@ -12,9 +13,9 @@ export default function WorkoutCard({
     return (
         <Link
             href={`/workouts/${workout.id}`}
-            className="group block overflow-hidden rounded-xl border border-white/10 bg-[#15161b] transition hover:border-[#ccff00]/40"
+            className="group block overflow-hidden rounded-lg border border-white/10 bg-[#15161b] transition hover:border-[#ccff00]/40"
         >
-            {/* Image */}
+            {/* Workout Image */}
             <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
                     src={workout.image}
@@ -24,28 +25,28 @@ export default function WorkoutCard({
                 />
             </div>
 
-            {/* Content */}
-            <div className="p-5">
+            {/* Card Content */}
+            <div className="p-4">
 
-                {/* Muscle Groups */}
+                {/* Muscle Tags */}
                 <div className="mb-3 flex flex-wrap gap-2">
                     {workout.muscleGroups.map((muscle) => (
                         <span
                             key={muscle}
-                            className="rounded-full bg-[#ccff00]/10 px-2.5 py-1 text-[10px] font-bold uppercase text-[#ccff00]"
+                            className="rounded-full bg-[#ccff00] px-2 py-1 text-[9px] font-black uppercase tracking-wide text-black"
                         >
                             {muscle}
                         </span>
                     ))}
                 </div>
 
-                {/* Name */}
-                <h3 className="text-lg font-black uppercase tracking-tight text-white">
+                {/* Workout Name */}
+                <h3 className="text-base font-black uppercase tracking-tight text-white">
                     {workout.name}
                 </h3>
 
                 {/* Equipment */}
-                <p className="mt-2 text-sm text-white/40">
+                <p className="mt-1 text-xs text-white/40">
                     {workout.equipment}
                 </p>
 
@@ -53,10 +54,18 @@ export default function WorkoutCard({
                 <div className="my-4 border-t border-white/10" />
 
                 {/* Stats */}
-                <div className="flex items-center justify-between text-xs text-white/50">
-                    <span>{workout.duration} min</span>
-                    <span>{workout.caloriesBurned} kcal</span>
-                    <span>★ {workout.rating}</span>
+                <div className="flex items-center gap-4 text-[11px] text-white/40">
+                    <span>
+                        {workout.duration} min
+                    </span>
+
+                    <span>
+                        {workout.caloriesBurned} kcal
+                    </span>
+
+                    <span>
+                        ★ {workout.rating}
+                    </span>
                 </div>
 
             </div>
