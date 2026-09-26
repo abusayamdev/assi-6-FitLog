@@ -55,7 +55,7 @@ export default function WorkoutLibrary() {
                 <div className="mb-8 flex items-end justify-between gap-6">
 
                     <div>
-                        <p className="fitlog-eyebrow">
+                        <p className="text-3xl font-bold ">
                             THE LIBRARY
                         </p>
 
